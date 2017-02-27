@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<script>
+    var x;
+    var y;
+    function outside(x) {
+        function inside(y) {
+            return x + y;
+        }
+        return inside;
+    }
+  //  var fn_inside = outside("Nishita");
+ //   var result = fn_inside("Chhasatia"); 
+    var result1 = outside("Nishita ")("Chhasatia"); 
+    console.log(result1);
+</script>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    
+    <body>
+
+        <form name="myForm"  align="center" id="form1">
+            <pre>
+                 First Name:  <input type="text" name="fname"/><br/>
+                 Last Name:   <input type="text" name="lname"/><br/>
+                 Gender:<br/>  
+                              <input type="radio" name="gender" value="male" > Male<br/>
+                              <input type="radio" name="gender" value="female"> Female<br/>
+                 State:
+                              <select id="s11">
+                              <option name="s1" value="">Choose an option</option>
+                              <option name="s1" value="nj">New Jersey</option>
+                              <option name="s1" value="ny">New York</option>
+                              <option name="s1" value="ma">Massachusetts</option>
+                              <option name="s1" value="pa">Pennsylvania</option>
+        </select><br/>
+                 <input type="checkbox"  name="accept" id="a1"/>I ACCEPT.<br/>
+                 <input type="submit" id="submit" value="Submit"></pre>
+        </form>
+        <script>
+          
+          document.getElementById("form1").addEventListener('submit',validate); 
+          document.getElementById("form1").addEventListener('submit',function(e){e.preventDefault();});
+         
+            
+            function validate()
+            {
+           
+                 var x = document.forms["myForm"]["fname"];
+                 var y = document.forms["myForm"]["lname"];
+                 var z = document.forms["myForm"]["gender"];
+                 var a = document.forms["myForm"]["s11"];
+                
+               
+                 var i=0;
+                 if (x.value == "")
+                 {
+                 
+                    x.style.backgroundColor = "red";
+                    alert("Please enter First Name");
+                    
+                } 
+                else if (!isNaN(x.value))
+                {
+                 
+                    x.style.backgroundColor = "red";
+                    alert("Please enter valid First Name");
+                    
+                }    
+                else  if(y.value=="")
+                {
+                     y.style.backgroundColor = "red";
+                     alert("Please enter Last Name"); 
+                     
+                } 
+                else if (!isNaN(y.value))
+                {
+                 
+                    y.style.backgroundColor = "red";
+                    alert("Please enter valid Last Name");
+                    
+                } 
+                else if(z[i].checked==false)
+                {
+                       alert("Select Gender");
+                }
+                else if(a.value=="")
+                {
+                    alert("select state");
+                }
+                 else if( myForm.a1.checked == false)
+                {
+                    alert("Mark Checkbox");
+                }
+           
+           }
+                 
+                   
+                
+
+                
+            
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          .democlass {
+             
+              visibility: visible;
+              color: blue;
+             
+            }
+</style>
+        
+        <script>
+         
+           
+            function Welcome()
+            {
+               
+                alert("Welcome To My Blog");
+                document.getElementById('Celsius').className = '1';
+                document.getElementById('d1').className = '1';
+                document.getElementById("F1").addEventListener("change", Temp,false);
+                document.getElementById("a").addEventListener("mouseover", Show,false);
+                document.getElementById("a").addEventListener("mouseout", Show,false);
+                document.getElementById("hideElems").addEventListener("click", ShowHideElems,false);
+                document.getElementById("showElems").addEventListener("click", ShowHideElems,false);
+              //  document.getElementById("submit").addEventListener("click", validate,false);
+                document.getElementById("edit").addEventListener("click", Edit,false);
+                document.getElementById("frm2").addEventListener("change", ChkBox,false);
+                document.getElementById("s1").addEventListener("click", ChkBoxSelect,false);
+                document.getElementById("chk_url").addEventListener("click", Chng_Url,false);
+                document.getElementById("add_url").addEventListener("click", Add_Url,false);
+                
+                document.getElementById("main_one").style.display="none";
+                document.getElementById("main_two").style.display="none";
+                document.getElementById("main_three").style.display="none";
+           
+                  
+           
+           
+                var att = document.createAttribute("class");
+                att.value = "democlass";
+                var x = document.getElementsByClassName("1");
+               
+                var i=0;
+                x[i].setAttributeNode(att);
+               
+            }
+           
+            function Temp()
+            {
+                var C = (F1.value - 32) * 5/9;
+                if(isNaN(F1.value))
+                {
+                    F1.style.backgroundColor = "red";
+                    alert("Enter Valid Fahrenheit Values")
+                }
+                else
+                {
+                document.getElementById("Celsius").innerHTML = Math.round(C);
+            }
+             
+            }
+            function Show()
+            {
+               
+                 var u =document.getElementById("ul1");
+               
+                 if (u.style.visibility == "hidden") {
+                        u.style.visibility = "visible";
+                    } else {
+                        u.style.visibility = "hidden";
+                }                  
+            }
+   /*       function Hide()
+            {
+               
+                var u =document.getElementById("ul1");
+                             
+                  u.style.visibility="hidden";
+                
+            }*/
+           
+            
+            function ShowHideElems()
+            {
+              
+              
+                 var x = document.getElementsByClassName("1");
+               
+             
+                   
+            
+                for( var i=0; i < x.length; i++ ) {
+                     
+                      if (x[i].style.visibility == "hidden")
+                      {
+                         
+                       x[i].style.visibility = "visible";
+                       
+                      }
+                      else  
+                      {                     
+                       x[i].style.visibility = "hidden";
+                      }  
+               
+               }
+            }
+            function ChkBox()
+            {
+                var e1= document.getElementById("frm2");
+               
+                  var text=" ";     
+                 
+                
+                  for( var i=0; i < e1.length; i++ ) {
+                      if(e1[i].checked ==true)
+                {
+                      text+= e1[i].value +" "+"<br/>";
+                      
+                }
+	       //else {e1[i].style.display = "none";             
+               		
+            }
+               document.getElementById("p2").innerHTML = text;	
+            }
+            function ChkBoxSelect()
+            {
+                var e1= document.getElementById("frm2");
+                 for( var i=0; i < e1.length; i++ ) {  
+                      if(e1[i].checked ==true)
+                {
+                      e1[i].checked=false;
+                      
+                }
+                 }
+            }
+            function Chng_Url()
+            {
+                var x = document.getElementById("url2"); 
+                var y = document.getElementsByClassName("anchor");
+               for( var i=0; i < y.length; i++ ) {  
+                      
+                       if(x.value!=y[i].value )
+                       {
+                           document.getElementById("add_url").disabled = false;
+                           
+                           
+                       }
+                
+                
+            }
+        }
+            function Add_Url()
+            {
+                var x1 = document.createElement("A");
+                
+                document.getElementsByTagName('a').className = "anchor";
+                var x = document.getElementById("url2");            
+                x1.setAttribute("href", x.value);
+                alert(x.value);
+                document.getElementById("anch1").innerHTML = x.value;
+                 
+                    
+                
+                
+               
+          }
+               
+  /*             function view() {
+                  var e1= document.getElementById("form1");
+                
+                  var text=" ";              
+                
+                  for( var i=0; i < e1.length; i++ ) {
+                      
+                
+                      text+= e1[i].value +" "+"<br/>";
+                      
+                  document.getElementById("view").innerHTML = text; 
+                //  e1[i].style.display = "none";
+	       //else {e1[i].style.display = "none";             
+               		
+	      }
+        document.getElementById("form1").reset();
+        document.getElementById("edit").style.visibility="visible";
+        
+        }*/
+           function Edit() {
+                  var e1= document.getElementById("view").innerHTML;
+                  document.getElementById("form1").f1.value=e1[0].innerHTML;	
+                  var text=" ";              
+                
+                  for( var i=0; i < e1.length; i++ ) {
+                      
+                
+                      text+= e1[i].value +" "+"<br/>";  
+             
+            
+                
+	       //else {e1[i].style.display = "none";             
+               
+	}
+        
+     
+        
+    }
+           
+           
+        </script>
+    </head>
+    <body style=" margin: 250px ;margin-top: 0px; background-image: url(donald_duck_2.jpg);background-repeat: no-repeat; background-position: right bottom" onload="Welcome()">
+     
+        <div  class="1" >
+             
+        </div> <div  class="1" >
+            Enter The Temperature In Fahrenheit:<br/>
+            <input type="text" id="F1" name="Fahrenheit"  /><br/>
+            
+        </div>
+      
+       <p id="Celsius"> Your Result In Celsius:</p>
+       
+       
+        <div id="d1">
+            <input type="button" value="Show Brand Names For Watches" id="a" />
+            <ul id="ul1" style="visibility: hidden; list-style-type:none ">
+                <li>Michel Kors</li>
+                <li>Fossil</li>
+                <li>Invicta</li>
+                <li>Rado</li>
+            </ul>
+            
+        </div>
+        <div  class="1" >
+           
+           
+            <input id="hideElems" type="button" value="Hide Elements">   
+        </div>
+        <div  class="2" >
+             <input id="showElems" type="button" value="Show Elements">   
+        </div>
+       <br/><br/>
+       
+       <!--show form from one div to another-->
+       
+       <div id="FormDiv" style="">
+           <pre>   
+       <form name="myForm"  align="center" id="form1">
+        First Name:  <input type="text" id="f1" name="fname" /><br/>
+        Last Name:   <input type="text" id="l1" name="lname"/><br/>
+        Gender:<br/>  
+                     <input type="radio" name="gender" value="male"  > Male<br/>
+                     <input type="radio" name="gender" value="female"> Female<br/>
+        State:
+                     <select id="s11">
+                     <option name="s1" value="">Choose an option</option>
+                     <option name="s1" value="nj" >New Jersey</option>
+                     <option name="s1" value="ny">New York</option>
+                     <option name="s1" value="ma">Massachusetts</option>
+                     <option name="s1" value="pa">Pennsylvania</option>
+        </select><br/>
+                
+        <input type="submit" id="submit" value="SAVE" name="submit">
+       </form>
+        </pre>
+       
+       </div>
+       <div  id="ViewDiv" >
+          
+             <input type="submit" style="visibility: hidden"  id="edit" value="EDIT" name="EDIT"  >
+       </div>
+       
+       <div id="main_one">Hey,This is Main One Div</div>
+       
+       <div id="main_two">Hey,This is Main Two Div<</div>
+       
+       <div id="main_three">Hey,This is Main Three Div<</div>
+       
+       
+       <div id="chk1">
+           <form id="frm2" >
+           <input type="checkbox"  name="accept" value="One" class="ch1"/>One<br/>
+           <input type="checkbox"  name="accept" value="Two" class="ch1"/>Two<br/>
+           <input type="checkbox"  name="accept" value="Three" class="ch1"/>Three<br/>
+           <input type="checkbox"  name="accept" value="Four" class="ch1"/>Four<br/>
+           <input type="checkbox"  name="accept" value="Five" class="ch1"/>Five<br/>
+           <input type="checkbox"  name="accept" value="Six" class="ch1"/>Six<br/>
+           <input type="checkbox"  name="accept" value="Seven" class="ch1"/>Seven<br/>
+           <input type="checkbox"  name="accept" value="Eight" class="ch1"/>Eight<br/>
+           <input type="checkbox"  name="accept" value="Nine" class="ch1"/>Nine<br/>
+           <input type="checkbox"  name="accept" value="Ten" class="ch1"/>Ten<br/>
+           <input type="button" id="s1" value="Select All" name="select all"/>
+           </form>
+           <p id="p2"></p>
+      
+       </div>
+       
+       <div id="url1">
+           <div id="anch1">
+               <a href="www.google.com" class="anchor"></a>
+               <a href="www.yahoo.com" class="anchor"></a>
+               <a href="www.wikipidia.com" class="anchor"></a>
+               <a href="www.gmail.com" class="anchor"></a>
+               <a href="www.macys.com" class="anchor"></a>
+                   
+               
+           </div>
+           <input type="text" id="url2" />
+           <input type="button" id="chk_url" value="CHECK URL" name="chk_url"/>
+           <input type="button" id="add_url" value="ADD LINK" name="add_url" disabled/>
+           
+       </div>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       <script>
+          
+          document.getElementById("form1").addEventListener('submit',validate); 
+          document.getElementById("form1").addEventListener('submit',function(e){e.preventDefault();});
+          
+          
+         
+            
+            function validate()
+            {
+                 var view =[];
+               
+                 var x = document.forms["myForm"]["fname"];
+                 var y = document.forms["myForm"]["lname"];
+                 var z = document.forms["myForm"]["gender"];
+                 var a = document.forms["myForm"]["s11"];
+                
+               
+                 var i=0;
+                 if (x.value == "")
+                 {
+                 
+                    x.style.backgroundColor = "red";
+                    alert("Please enter First Name");
+                
+                    
+                } 
+                else if (!isNaN(x.value))
+                {
+                 
+                    x.style.backgroundColor = "red";
+                    alert("Please enter valid First Name");
+                    
+                }    
+                else  if(y.value=="")
+                {
+                     y.style.backgroundColor = "red";
+                     alert("Please enter Last Name"); 
+                     
+                } 
+                else if (!isNaN(y.value))
+                {
+                 
+                    y.style.backgroundColor = "red";
+                    alert("Please enter valid Last Name");
+                    
+                } 
+                else if(z[i].checked==false)
+                {
+                       alert("Select Gender");
+                }
+                else if(a.value=="")
+                {
+                    alert("select state");
+                }
+                else
+                {
+                  view.push(x.value);
+                  view.push(y.value);
+                  view.push(z.value);
+                  view.push(a.value);
+               
+                }
+                
+           
+                 var i;           
+                 var text ="";
+                 for( i=0; i < view.length; i++ ) {
+                      
+                       var child1 = document.createElement("li");
+                       var val= document.getElementById("form1");
+                       var val2= val.getElementsByTagName("input");
+                      
+                       document.getElementById("ViewDiv").appendChild(child1); 
+                       var child2=document.createTextNode(view[i]);
+                       child1.appendChild(child2);
+                    
+                       child1.setAttribute("ID", val2[i].name);
+                       
+                       alert(child1.id);
+                      text+=view[i] +" "+"<br/>";
+                      
+                  }
+                  document.getElementById("form1").reset();
+                  document.getElementById("edit").style.visibility="visible";
+             
+           }
+            
+           function Edit() {
+                  var e1= document.getElementById("ViewDiv");
+                  var e2= e1.getElementsByTagName("li");
+                  for( i=0; i < 6; i++ ) {
+                  alert(e2[i].id);
+                  }
+             
+                 document.forms["myForm"]["fname"].value=e2[0].innerHTML;
+                 document.forms["myForm"]["lname"].value=e2[1].innerHTML;
+                if(document.forms["myForm"]["gender"].value=e2[2].innerHTML)
+                {
+                    document.forms["myForm"]["gender"].checked=true;
+                }
+                 document.forms["myForm"]["s11"].value=e2[3].innerHTML;
+                
+               
+                   
+                         
+                
+                
+	}
+                   
+                
+
+                
+            
+            
+        </script>
+    </body>
+</html>

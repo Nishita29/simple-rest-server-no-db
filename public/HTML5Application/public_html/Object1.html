@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+
+
+        
+
+       
+        
+        var square ={
+            triangle:{
+                sideA : 3,
+                sideB : 4,
+                sideC : 5
+            }
+            
+            
+        };
+
+        var square_pyramid=new Object();
+        
+        
+        
+        square.triangle.getArea    =   function ( a, b, c ) {
+  
+        
+            var semiperimeter   =   (a + b + c) / 2;
+            var calculation     =   semiperimeter * (semiperimeter - a) *
+                                   (semiperimeter - b) * (semiperimeter - c);
+                           
+            return Math.sqrt( calculation );
+        
+        };   
+        
+        square.getArea = function(a){
+            var square_area = 4 * a ;
+            return square_area;
+        };
+
+        square_pyramid.getArea = function(a,b) {
+//if(square.sideD== triangle.sideA || square.sideD== triangle.sideB  || square.sideD== triangle.sideC)
+ // {
+  
+             var square_pyramid_Area = 4 * a + b;
+             return square_pyramid_Area;
+         //  alert(square_pyramid_Area);
+ /* }
+  else
+  {
+  alert("Square Pyramid is not possible in this case");
+  }*/
+            };
+
+
+console.log(square_pyramid.getArea(square.triangle.getArea(square.triangle.sideA, square.triangle.sideB, square.triangle.sideC), square.getArea(square.triangle.sideA)));
+
+console.log(square.getArea(square.triangle.sideA));
+console.log(square.triangle.getArea(square.triangle.sideA,square.triangle.sideB, square.triangle.sideC ));
+
+</script>
+
+    </body>
+</html>

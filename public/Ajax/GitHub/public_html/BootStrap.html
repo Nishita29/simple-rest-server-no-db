@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){  
+    var counter;
+    $("#frm1").submit(function (ev) {
+        ev.preventDefault();
+        var Item_Name=document.getElementById("itm_name").value;
+        var Item_Price=document.getElementById("itm_prc").value;
+        var Item_Description=document.getElementById("itm_desc").value;
+
+        $('#frm1').delegate('.glyphicon','click',function(){
+            var id1=$(this).parent().attr('id');
+            var prt=$(this).parent();
+            if(confirm("Are you sure you want to delete this Record?")){
+            $.ajax({
+                type: "delete",
+                url: "/products/"+id1,
+                data:{id1},
+                success: function(response){ 
+                   console.log(response);
+                   prt.remove();
+                }
+            });
+        }
+        return false;
+        });
+        if (Item_Name == '' || Item_Price == '' || Item_Description=='') {
+            alert("Please Fill All Fields");
+        } 
+        else{
+
+            $.ajax({
+                type: "POST",
+                url: '/products',
+                data:{  
+                I_name:document.forms["myForm"]["itm_name"].value,
+                I_Desce:document.forms["myForm"]["itm_desc"].value,
+                I_Price:document.forms["myForm"]["itm_prc"].value
+                }, //frm.serialize(),
+                success: function (data) {
+                    if(counter>0){ 
+                        $("#frm1").append($("<div class='div1'id='"+data['id']+"' style='background-color: #EAEAEA; background-color: rgba(0.8, 0, 0.5,0.3);padding: 10px;margin-top: 15px'>"
+                        +"<h3 class='col-sm-8'>" +data['I_name']+ "</h3><br/>"+"<span class='btn btn-default'  style='background-color: #428BCA;width:50px;color: white;margin-right: 20px'>"
+                        +"$" +data['I_Price']+"</span><span style='padding-left:50px' class='glyphicon glyphicon-remove-sign' ></span>"
+                        +" <h5  style='margin-left: 15px'>"+data['I_Desce']+"</h5></div>"));
+
+                    }
+                    else{
+                        counter=1;
+                        $.getJSON("/products",function(data){
+                            $.each(data,function(i,field){
+                                $("#frm1").append($("<div class='div1' id='"+field['id']+"' style='background-color: #EAEAEA; background-color: rgba(0.8, 0, 0.5,0.3);padding: 10px;margin-right:20px;\n\
+                                margin-top: 15px'>"+"<h3 class='col-sm-8'>" +field['I_name']+ "</h3><br/>"+"<span class='btn btn-default'  style='background-color: #428BCA;color: white;margin-right: 20px'>"+"$" +field['I_Price']+"</span><span class='glyphicon glyphicon-remove-sign'></span>"
+                                +" <h5  style='margin-left: 15px'>"+field['I_Desce']+"</h5></div>"));
+                            }); 
+                        });
+                    }
+                }
+            });
+
+        } 
+
+    });
+});
+ /*
+function Remove(element) {
+    var id1=$(element).parent().attr('id');
+    if(confirm("Are you sure you want to delete this Record?")){
+        $.ajax({
+            type: "delete",
+            url: "/products/"+id1,
+            success: function(){ 
+               $(element).parent().remove();
+            }
+        });
+    }
+    return false;
+}*/
+</script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Store</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Catalog</a></li>
+            <li><a href="#">Content</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-left: 10px">
+    <div class="row" >
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Cras justo odio</a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div> 
+        </div>
+        <div class="col-sm-9">
+            <form class="form-inline" id="frm1" name="myForm" style="margin-bottom: 10px" action="get">
+                <div class="form-group" style="margin-bottom: 10px">
+                    <label for="search">Search</label>
+                    <input type="text" class="form-control" id="search" placeholder="Search by item name">
+                </div>
+                <div class="form-group" >
+                    <label for="item">Add Item</label>
+                    <input type="text" class="form-control" id="itm_name" placeholder="Item Name">
+                    <input type="text" class="form-control" id="itm_desc" placeholder="Description">
+                    <input type="text" class="form-control" id="itm_prc" placeholder="Price">
+                    <button type="submit" class="btn btn-default" style="background-color: #EFEFF0">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

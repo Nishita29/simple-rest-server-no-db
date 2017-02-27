@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+$("span").addClass('clickable');
+$('input').addClass('clickable');
+$("BUTTON").addClass('clickable');
+$("#d1").on('click','.clickable',function(){
+    if($(this).prop("tagName")=="SPAN"){   
+        if($(this).prev().prop("checked") == true){
+            $(this).prev().prop('checked', false);  
+            AddRemove.call($(this ).prev());
+        }
+        else if($(this).prev().prop("checked") == false){
+            $(this).prev().prop('checked', true);  
+            AddRemove.call($( this ).prev());
+        }
+    }       
+    else if($(this).prop("type")=="checkbox"){
+        AddRemove.call($(this)); 
+    }
+    else if($(this).prop("type")=="button"){
+        Add.call($(this));
+    }
+});
+function Add(){
+    var text = $('#chk').val();
+    $('ul').append('<li> <input type="checkbox" /><span>'+ text +'</span></li> <br/>');
+    $('input').addClass('clickable');
+    $("span").addClass('clickable');
+}
+      
+function AddRemove(){
+    var origval=$( this ).next().text();
+    if($(this).prop("checked") == true){
+        $( "#d2" ).append($( "<p></p>" ).text(origval));
+    }
+    else if($(this).prop("checked") == false){
+        $("#d2 p").each( function(){
+            if(origval==$(this).text()){
+                $(this).remove();
+            }
+        });
+    }
+}
+}); 
+   
+   
+</script>
+</head>
+<body style="margin:81px 0px 0px 120px">
+<div class="left-div" id="d1" style="border:1px solid black; float:left; min-height:354px;min-width: 365px;box-shadow: 5px 5px 5px #DCDCDC;" >
+    <ul style="list-style: none;"> 
+        <li><input type="checkbox"  name="fruit" value="Apple"/><span>Apple</span></li>
+        <li> <input type="checkbox"  name="fruit" value="Mango"/><span>Mango</span></li>
+        <li> <input type="checkbox"  name="fruit" value="Strawberry"/><span>Strawberry</span></li>
+        <li><input type="checkbox"  name="fruit" value="Cherry"/><span>Cherry</span></li>
+    </ul>  <br/>                 
+    ADD NEW VALUES<br/>                    
+    <input type="text" id="chk" /><br/><br/>
+    <button type="button" id="add">ADD</button>                    
+</div>
+<div class="right-div" id="d2" style="border:1px solid black; float:left; min-height:354px;min-width:365px;box-shadow: 5px 5px 5px #DCDCDC;">
+</div>     
+</body>
+</html>

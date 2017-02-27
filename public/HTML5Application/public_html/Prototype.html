@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+            //parent class
+            var computer = function()
+            {
+                this.serial_no=true;
+                
+            };
+            //prototype method
+            computer.prototype.brand ="apple";
+           // computer.prototype.parts=5;
+            
+            computer.prototype.print= function(){
+                console.log(this.serial_no ? 'valid computer ': 'not valid');
+            };
+           //child class1 
+           var hardware =function(h_name,serial_no)
+           {
+               this.h_name =h_name;
+               this.serial_no = serial_no;
+           };
+            
+            //child class2
+             var software =function(s_name,serial_no,brand,parts)
+           {
+               computer.call(this);
+               this.s_name =s_name;
+               this.serial_no = serial_no;
+               this.brand=brand;
+               this.parts =parts;
+           };
+            //inherit parent class prototype in child class 
+              hardware.prototype = new computer();
+             // software.prototype = new computer();
+              
+             // hardware.prototype =Object.create(computer.prototype);
+             
+            var laptop =new hardware("mother board",true);
+            var laptop2=new software("windows",false,"microsoft",3);
+            // hardware.prototype.constructor =hardware;
+            
+            
+            console.log(laptop.print());//inherit from the prototype of base class
+            console.log(laptop2.parts);//inherit from the prototype of base class
+            console.log(laptop.brand);//inherit from the prototype of base class
+            console.log(laptop2.brand);//inherit from the protype of child class 2
+            
+        </script>
+    </body>
+</html>

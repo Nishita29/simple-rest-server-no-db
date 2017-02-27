@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+           
+            function triangle(a,b,c)
+            {
+              this.sideA = a;
+              this.sideB = b;
+              this.sideC = c;
+                
+            }
+            
+            
+             var square_pyramid=new Object();
+        
+             var tri1 = new triangle(3,4,5);
+             
+             var square1= function() {
+             var square_area = 4 * tri1.sideA ;
+             return square_area;
+   
+             };
+        
+             tri1.getArea = function(){
+            
+            
+             var semiperimeter   =   (this.sideA + this.sideB + this.sideC) / 2;
+             var calculation     =   semiperimeter * (semiperimeter - this.sideA) *
+                                   (semiperimeter - this.sideB) * (semiperimeter - this.sideC);
+                           
+            return Math.sqrt( calculation );
+            
+            };
+            
+             square_pyramid.getArea = function() {
+
+  
+             var square_pyramid_Area = 4 * tri1.getArea() + square1();
+             return square_pyramid_Area;
+        
+            };
+        
+        
+        console.log(tri1.getArea());
+        console.log(square1());
+        console.log(square_pyramid.getArea());    
+            
+            
+
+
+            
+            
+        </script>
+        
+    </body>
+</html>

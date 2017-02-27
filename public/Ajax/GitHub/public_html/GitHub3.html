@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <form name="myForm" id="frm1" action="/users">
+<pre>
+    First Name:  <input type="text" id="fname" name="fname"/><br/>
+    Last Name:   <input type="text" id="lname" name="lname"/><br/>
+    <input type="submit" id="submit"   value="Submit">
+</pre>
+</form>
+<div id="div1"></div>  
+<script>
+$("#submit").on("click",function(ev){ev.preventDefault();});
+$(document).ready(function(){
+    $("#submit").one("click",function(){
+    $.getJSON("/users",function(data){
+        $.each(data,function(field){
+            $("#div1").append(field['fname']+"</br>");
+            $("#div1").append(field['lname']+"</br>");
+            
+        });
+    });
+    setTimeout(submitData,1000);
+    $("#submit").on("click",submitData);
+    });
+    });
+function submitData(){
+    $.ajax({
+        type:"POST",
+        url:"/users",
+        data:{
+            fname:document.forms["myForm"]["fname"].value,
+            lname:document.forms["myForm"]["lname"].value
+        },
+        success:function(){
+            alert("Data Saved");
+        },
+        dataFilter:function(data){
+            var d=JSON.parse(data);
+            $("#div1").append(d.fname+" "+d.lname+"</br>");
+        }
+    });
+}
+</script>
+    </body>
+</html>

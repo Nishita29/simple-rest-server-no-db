@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+            function Emp_details(ssn,fn,ln,Add)
+            {
+              this.SSN = ssn;
+              this.f_name= fn;
+              this.l_name =ln;
+              this.Address = Add;
+              
+            }
+            
+            function Emp_Proj(pno,pn,ploc) 
+            {
+             this.Project_no =pno;
+             this.Project_name =pn;
+             this.Project_location =ploc;
+               
+            }       
+            
+           
+             
+            var Emp_report = new Emp_details(123456,"JOHN","SWIFT","665 BERRY AVE");
+            
+            var Project_details = new Emp_Proj(1,"Account Management","Texas");
+            
+            var Dept_details = new Emp_Dept(1,"Accounting","NEW YORK",Emp_report,Project_details);
+            
+            
+            function Emp_Dept(dno,dname,dloc,Emp_report,Project_details)  
+            {
+             this.Department_no = dno;
+             this.Department_name =dname;
+             this.Department_location =dloc;  
+             this.Emp_report = Emp_report;
+             this.Project_details= Project_details;
+            }
+            
+             
+            Dept_details.getOwnPropertyNames = function()
+            {
+             Emp_details.call(this);
+             Emp_Proj.call(this);
+            
+                document.write("The "  +this.Department_no ,"  "+this.Department_name ," is at " +this.Department_location ,
+                             " have employee " +Dept_details.Emp_report.f_name ," "+Dept_details.Project_details.Project_no ,
+                             " having project " +Dept_details.Project_details.Project_name,"</br></br>" );  
+              
+                          
+            };
+            
+            Emp_report.getOwnPropertyNames= function ()
+            {
+                document.write("The SSN no. of employee " +this.f_name ," " +this.l_name ," is ",+this.SSN,"</br></br>" );
+               
+                             
+            };
+            
+           
+            Project_details.getOwnPropertyNames= function()
+            {               
+                document.write("The employee  is working on "+this.Project_name ,
+                               " having project no. " +this.Project_no," at ",this.Project_location,"</br></br>");
+                
+                
+            };
+            
+          
+            console.log(Emp_report.getOwnPropertyNames());
+            console.log(Project_details.getOwnPropertyNames());
+            console.log(Dept_details.getOwnPropertyNames());
+        </script>
+        
+    </body>
+</html>

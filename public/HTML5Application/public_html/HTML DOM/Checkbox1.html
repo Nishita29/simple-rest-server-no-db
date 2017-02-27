@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+       
+    </head>
+    
+    
+<body style="margin:81px 0px 0px 120px">
+
+<div class="left-div" id="d1" style="border:1px solid black; float:left; min-height:354px;min-width: 365px;box-shadow: 5px 5px 5px #DCDCDC;" >
+
+                    <form id="frm1" action="#"  >
+                           <input type="checkbox"  name="fruit" value="Apple" ><span>Apple</span><br/>
+                           <input type="checkbox"  name="fruit" value="Mango" ><span>Mango</span><br/>
+                           <input type="checkbox"  name="fruit" value="Strawberry"><span>Strawberry</span><br/>
+                           <input type="checkbox"  name="fruit" value="Cherry"><span>Cherry</span><br/>
+                    </form>
+</div>
+
+<div class="right-div" id="d2" style="border:1px solid black; float:left; min-height:354px;min-width:365px;box-shadow: 5px 5px 5px #DCDCDC;">
+
+ 
+
+</div>
+<div style=" float:left;clear:left;margin-top: 20px;">
+                     ADD NEW VALUES<br/>
+                     <input type="text" id="chk" /><br/><br/>
+                         <button id="add">ADD</button>
+</div>
+    
+
+    <script>
+    document.getElementById("add").addEventListener("click",Add);
+
+   
+    
+    for(var i=0;i < document.getElementById("frm1").length;i++ ) { 
+                      
+                      document.getElementsByTagName("input")[i].addEventListener("change", ShowHide);
+                      document.getElementsByTagName("span")[i].addEventListener("click", ShowHide1,false);
+                     
+    }
+   
+   
+     
+    
+    
+    function ShowHide() {
+     
+                  var text=" ";              
+                  
+                  if(this.checked==true)
+                  { 
+                    
+                      text+=this.nextSibling.innerHTML;
+                  
+                         var para = document.createElement("P");
+                         var child= document.createTextNode(text);
+                             para.appendChild(child);
+                             document.getElementById("d2").appendChild(para);
+                             para.setAttribute("id", this.value);
+                   
+                  }
+                  else
+                  {
+                      var e2= document.getElementById("d2");
+                      var e3 = document.getElementById(this.value);
+                          
+                         e2.removeChild(e3);
+                  }
+                 
+    }
+    function ShowHide1() {
+                  
+                  
+                  var text=" ";              
+                  var ch1=this.previousSibling;
+                 
+                  if(ch1.checked!=true)
+                  { 
+                     ch1.checked=true;
+                     text+=this.innerHTML;
+                  
+                        var para = document.createElement("P");
+                        var child= document.createTextNode(text);
+                            para.appendChild(child);
+                            document.getElementById("d2").appendChild(para);
+                            para.setAttribute("id", ch1.value);
+                   
+                  }
+                  else if(ch1.checked==true)
+                  {
+                      ch1.checked=false;
+                      
+                      var e2= document.getElementById("d2");
+                      var e3 = document.getElementById(ch1.value);
+                     
+                      e2.removeChild(e3);
+                     
+                     
+                   }
+                 
+    }
+    function Add() {
+    
+        var x = document.createElement("INPUT");
+        var y = document.getElementById("frm1");
+        var z = document.getElementById("chk");
+        var x1 = document.createElement("SPAN");
+        var linebreak = document.createElement("br");
+        var x2= document.createTextNode(z.value);
+
+        x.setAttribute("type", "checkbox");
+        x.setAttribute("value",z.value);
+        x.addEventListener("change", ShowHide);
+        x1.addEventListener("click", ShowHide1);
+
+
+             y.appendChild(x);
+             y.appendChild(x1);
+             y.appendChild(linebreak);
+             x.nextSibling=x1;
+             x1.appendChild(x2);
+    }
+        </script>
+       
+    </body>
+</html>
