@@ -27,3 +27,4 @@ data
 
 # Users Environment Variables
 .lock-wscript
+/public/Ajax/Quiz/nbproject/private/

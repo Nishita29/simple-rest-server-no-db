@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="../angular.js"></script>   
+    </head>
+    <body>
+       <div ng-app="myApp" ng-controller="myCtrl"> 
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Store</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Catalog</a></li>
+        <li><a href="#">Content</a></li>
+    </ul>
+</div>
+</nav>
+<div class="container" style="margin-left: 10px">
+    <div class="row" >
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Cras justo odio</a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div> 
+        </div>
+        <div class="col-sm-9">
+            <form class="form-inline" id="frm1" name="myForm" style="margin-bottom: 10px" method="get" >
+                <div class="form-group" style="margin-bottom: 10px">
+                    <label for="search">Search</label>
+                    <input type="text" class="form-control" id="search" placeholder="Search by item name">
+                </div>
+                <div class="form-group" >
+                    <label for="item">Add Item</label>
+                    <input type="text" class="form-control" id="itm_name" ng-model="I_name" placeholder="Item Name">
+                    <input type="text" class="form-control" id="itm_desc" ng-model="I_Desce" placeholder="Description">
+                    <input type="text" class="form-control" id="itm_prc" ng-model="I_Price" placeholder="Price">
+                    <button type="submit" class="btn btn-default" style="background-color: #EFEFF0" ng-click="SendData()">Add</button>
+                </div>
+            </form>
+                <div ng-repeat="myWelcome in myWelcome" >
+                    <div class="div1" id="{{myWelcome.id}}" style="background-color: #EAEAEA; background-color: rgba(0.8, 0, 0.5,0.3);padding: 10px;margin-right:20px;margin-top: 15px">
+                        <h3 class="col-sm-8">{{myWelcome.I_name}}</h3><br/>
+                        <span class="btn btn-default" style="background-color: #428BCA;color: white;margin-right: 20px">${{myWelcome.I_prc}}</span>
+                        <span class="glyphicon glyphicon-remove-sign" ng-click="DelData(myWelcome.id)"></span>
+                        <h5  style="margin-left: 15px">{{myWelcome.I_desc}}</h5>
+                    </div>              
+                </div>
+        </div>
+    </div>
+</div>       
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.service('ProductData',function($http){   
+     
+    this.GetProducts = function(){ 
+    var myWelcome =[];      
+     $http({
+           method : "GET",
+           url : "/products"
+       }).then(function mySucces(response) {console.log("hi in get");
+           this.myWelcome= response.data;
+           console.log(response.data);
+           return response.data;
+       }, function myError(response) {
+          // this.myWelcome = response.statusText;
+           return response.statusText;
+       }); 
+       
+       return myWelcome;
+   };
+    this.PostProducts = function(data){    
+    console.log(data);
+    $http.post('/products', data).then(function (Response) {
+        return  Response;
+        this.push(Response.data);
+    },
+    function (data, status, header, config) {
+        this.ResponseDetails = "Data: " + data +
+            "<hr />status: " + status +
+            "<hr />headers: " + header +
+            "<hr />config: " + config;
+    });   
+};
+});
+app.controller('myCtrl', function($scope,ProductData) {      
+    this.myWelcome = ProductData.GetProducts();
+   
+    $scope.SendData = function(){
+    var data = {
+        I_prc: $scope.I_Price,
+        I_desc:$scope.I_Desce,
+        I_name:$scope.I_name     
+    };    
+    // $scope.ans1 = ProductData.GetProducts(data);
+     $scope.answer = ProductData.PostProducts(data); 
+   };
+}); 
+</script>
+    </body>
+</html>
